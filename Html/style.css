@@ -1,0 +1,32 @@
+BODY {
+
+scrollbar-face-color: #000000;
+scrollbar-shadow-color: #FFFFFF;
+scrollbar-highlight-color: #FFFFFF;
+scrollbar-3dlight-color: #006600;
+scrollbar-darkshadow-color:#000000;
+scrollbar-arrow-color: #0099CC;
+scrollbar-track-color: #000000;
+
+font-family : Arial, sans-serif ;
+font-size : 10pt;
+color: #FFFFFF;
+
+}
+
+
+A {
+	text-decoration: underline;
+	color: #639CFF;
+}
+
+A:Hover {
+	text-decoration: none;
+	color: #000000;
+	background-color:#639CFF;
+}
+
+H1 {
+	font-size : 22px;
+	color : #FFFFFF;
+}
