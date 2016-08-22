@@ -1,49 +1,15 @@
-#main {
-  position: relative;
-  margin: 60px;
-  background-color: #e0ebeb;
-  font-family: "Times New Roman", Georgia;
+body{
+	margin-top:60px;
+	font-family: Raleway;
+	text-align: center;
+	background-color: #d6d6c2;
 }
 
-#intro{
-  background-color: #d6d6c2;
-  text-align: center;
-  /* height: 700px; */
-  height:100vh;
+#credit{
+	font-size: small;
 }
 
-#about{
-  padding-top: 50px;
-  /*height: 700px;*/
-  height:100vh;
-  color: #000;
-  background-color: #d6d6c2;
-}
-
-#works{
-  padding-top: 50px;
-  color: #000;
-  background-color: #d6d6c2;
-}
-
-#connect{
-  padding-top: 50px;
-  color: #000;
-  background-color: #d6d6c2;
-  text-align: right;
-}
-
-#profilePic {
-
-}
-
-#workThumb {
-  height: 250px;
-  width: 250px;
-}
-
-#buttons{
-  position: relative;
-  right: 0px;
-  bottom: 0px;
+footer {
+	position: fixed;
+	bottom: 0px;
 }
