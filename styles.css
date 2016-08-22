@@ -1,8 +1,8 @@
-body {
+#main {
   position: relative;
   margin: 60px;
   background-color: #cfe6ff;
-  font-family: Georgia, "Times New Roman";
+  font-family: "Times New Roman", Georgia;
 }
 
 #intro{
