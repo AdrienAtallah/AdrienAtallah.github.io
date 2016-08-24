@@ -9,7 +9,7 @@
   background-color: #d6d6c2;
  // text-align: center;
   /* height: 700px; */
-  height:100vh;
+  //height:100vh;
 }
 
 #about{
@@ -24,6 +24,12 @@
   padding-top: 50px;
   color: #000;
   background-color: #d6d6c2;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
 }
 
 #connect{
