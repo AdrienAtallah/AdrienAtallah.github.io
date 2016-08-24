@@ -29,7 +29,7 @@
  // padding-top: 50px;
  // color: #000;
   background-color: #d6d6c2;
-  //height:100vh;
+ // height: auto;
 }
 
 #carousel-pic{
@@ -41,8 +41,6 @@
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-    //width: 500px;
-    //height: 500px;
     margin: auto;
     padding-bottom: 150px;
 }
@@ -54,8 +52,14 @@
     bottom: -150px;
 }
 
+.carousel-caption > p {
+    color: black;
+    //font-size: small;
+    //font-style: oblique;
+}
+
 #connect{
-  padding-top: 50px;
+  padding-top: 100px;
   color: #000;
   background-color: #d6d6c2;
   text-align: right;
@@ -78,5 +82,5 @@
 
 #credit{
 	position: absolute;
-	bottom: 0px;
+	bottom: -10px;
 }
