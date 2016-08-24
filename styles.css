@@ -26,20 +26,29 @@
 }
 
 #projects{
-  padding-top: 50px;
-  color: #000;
+ // padding-top: 50px;
+ // color: #000;
   background-color: #d6d6c2;
+}
+
+#carousel-pic{
+    width: 500px;
+    height: 500px;
 }
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-    width: 50%;
+    //width: 500px;
+    //height: 500px;
     margin: auto;
+    padding-bottom: 150px;
 }
 
-.carousel-caption{
-    margin-top: 50px;
-    text-shadow: 100%;
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: -150px;
 }
 
 #connect{
@@ -64,10 +73,8 @@
   bottom: 0px;
 }
 
-
-
 footer {
-    margin-top: 300px;
+    padding-top: 300px;
 	position: absolute;
 	bottom: 0px;
 }
