@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="styles.css" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,91 +16,90 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
 
 </head>
-</html>
+<body id="pbody">
+    <div class="container-fluid">
+
+        <div class="jumbotron jumbotron-fluid text-center">
+
+            <div class="row text-center">
+
+                <h2>Random Quote:</h2>
+
+            </div>
+
+            <div class="row text-center">
+
+                <div class="col-xs-12 well message">
+                    <q class="quote lead">
+                        Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.
+                    </q>
+
+                    <br><br>
+
+                    <cite class="author">
+                        Mosher’s Law of Software Engineering
+                    </cite>
+                </div>
+
+            </div>
+
+            <div class="row text-center">
+
+                <button id="getQuote" class="btn btn-primary btn-lg">
+                    Generate Random Quote
+                </button>
+
+                <a id="tweet" target="_blank" href="https://twitter.com/intent/tweet?text='Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.' -Mosher’s Law of Software Engineering">
+                    <button class="btn btn-primary btn-lg">
+                        Tweet this
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
+        </footer>
+
+    </div>
 
 
-<!--<body> -->
 
-<div class="jumbotron text-center container-fluid">
+    <!-- </div> -->
 
-	<div class = "row text-center">
 
-		<h2>Random Quote:</h2>
+    <script type="text/javascript">
+    $(function() {
+        $("#getQuote").on("click", function() {
 
-	</div>
+            $.ajax({
+                url: "http://quotes.stormconsultancy.co.uk/random.json",
+                dataType: "jsonp",
+                jsonpCallback: "gotQuote"
+            });
+        });	//end click
+    });
 
-	<div class = "row text-center">
+    function gotQuote(json){
 
-		<div class = "col-xs-12 well message">
-			<q class = "quote">
-				Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.
-			</q>
+        var $quoteElement = $('.quote');
+        var $authorElement = $('.author');
 
-			<br><br>
+        $quoteElement.fadeOut('slow', function () {
+            $quoteElement.html(json.quote);
+            $quoteElement.fadeIn('slow');
+        });
 
-			<cite class = "author">
-				Mosher’s Law of Software Engineering!
-			</cite>
-		</div>
+        $authorElement.fadeOut('slow', function () {
+            $authorElement.html(json.author);
+            $authorElement.fadeIn('slow');
 
-	</div>
+        });
 
-	<div class = "row text-center">
+        $('#tweet').attr('href', 'https://twitter.com/intent/tweet?text=' + '\'' + encodeURIComponent(json.quote) + '\'' + ' -' + json.author);
 
-		<div class = "col-xs-12">
+    }; //end gotQuote
 
-			<button id = "getMessage" class = "btn btn-primary">
-				Generate Random Quote
-			</button>
-
-			<a id = "tweet" target="_blank" href="https://twitter.com/intent/tweet?text='I got a fever and the only prescription is more cowbell.' -Christopher Walken">
-				<button class = "btn btn-primary">
-					Tweet this
-				</button>
-			</a>
-		</div>
-
-	</div>
-
-	<footer>
-		<p id = "credit">Coded By: <a href="https://www.freecodecamp.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
-	</footer>
-
-</div>
-
-<script type="text/javascript">
-$(function() {
-	$("#getMessage").on("click", function() {
-
-		$.ajax({
-			url: "http://quotes.stormconsultancy.co.uk/random.json",
-			dataType: "jsonp",
-			jsonpCallback: "gotQuote"
-		});
-	});	//end click
-});
-
-function gotQuote(json){
-
-	var $quoteElement = $('.quote');
-	var $authorElement = $('.author');
-
-	$quoteElement.fadeOut('slow', function () {
-		$quoteElement.html(json.quote);
-		$quoteElement.fadeIn('slow');
-	});
-
-	$authorElement.fadeOut('slow', function () {
-		$authorElement.html(json.author);
-		$authorElement.fadeIn('slow');
-
-	});
-
-	$('#tweet').attr('href', 'https://twitter.com/intent/tweet?text=' + "'" + json.quote + "'" + " -" + json.author);
-
-}; //end gotQuote
-
-</script>
-
-<!-- </body> -->
+    </script>
+</body>
 </html>
