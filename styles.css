@@ -1,8 +1,8 @@
 #main {
   position: relative;
-  margin: 60px;
+  margin-top: 20px;
   background-color: #e0ebeb;
-  font-family: "Times New Roman", Georgia;
+  font-family: Raleway, "Georgia";
 }
 
 #intro{
@@ -19,8 +19,8 @@
 #technologies{
   padding-top: 50px;
   /*height: 700px;*/
-  height:100vh;
-  color: #000;
+  //height:100vh;
+  //color: #000;
   background-color: #d6d6c2;
   align: justify;
 }
@@ -29,11 +29,14 @@
  // padding-top: 50px;
  // color: #000;
   background-color: #d6d6c2;
+  //height:100vh;
 }
 
 #carousel-pic{
-    width: 500px;
+    //width: 500px;
     height: 500px;
+    width: auto;
+    //height: auto;
 }
 
 .carousel-inner > .item > img,
@@ -73,7 +76,7 @@
   bottom: 0px;
 }
 
-footer {
+#credit{
 	position: absolute;
 	bottom: 0px;
 }
