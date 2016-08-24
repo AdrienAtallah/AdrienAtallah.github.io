@@ -60,7 +60,7 @@
                 <img id="profilePic" class="figure-img img-thumbnail" src="https://github.com/AdrienAtallah/AdrienAtallah.github.io/blob/master/images/Cropped.png?raw=true" alt="me-profile-pic">
             </div>
 
-            <div class="col-sm-9">
+            <div id="introText" class="col-sm-9">
                 <p class="lead">I am a junior software/web developer with a background in computational physics.</p>
 
                 <p> I completed my master's degree in computational physics from San Diego State University in May 2015 where I was part of a collaboration working on a computational model of a neutron star. All of my coding was done in Fortran on a Linux machine. </p>
@@ -69,13 +69,14 @@
 
                 <p> Since graduating I have been teaching Mathematics, Physics and Computer Science at High Bluff Academy, a private high school in San Diego, California.</p>
 
-                <p>I am primarily self taught as a web developer and am currently working towards a Full Stack Development Certification through Free Code Camp, which has proven to be an excellent resource and aid to my learning. I am always eager to further my skillset and keep up with the latest technologies. </p>
+                <p>I am primarily self taught as a web developer and am currently working towards a Full Stack Development Certification through Free Code Camp. I am also working on a certificate in Data Science through John Hopkin's University (Coursera). </p>
+                <p> I am always eager to further my skillset and keep up with the latest technologies. </p>
             </div>
         </div>
     </div>
     <!--end Intro section -->
 
-    <!--begin  section-->
+    <!--begin technologies section-->
     <div id="technologies" class="container-fluid jumbotron">
         <h2>Technologies</h2>
         <!-- <div class="col-sm-8"> -->
@@ -125,16 +126,11 @@
     <!--end technologies section-->
 
     <!--begin projects section-->
-
-
-
     <div id="projects" class="container-fluid jumbotron">
         <h2>Projects</h2>
-
-
         <div class="container">
-            <br>
-            <div id="projectsCarousel" class="carousel slide">
+
+            <div id="projectsCarousel" class="carousel slide" data-interval="false">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#projectsCarousel" data-slide-to="0" class="active"></li>
@@ -147,27 +143,37 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
                         <a href="http://adrienatallah.github.io/projects/feynmanTribute/index.htm" target="_blank">
-                            <img src="http://adrienatallah.github.io/projects/feynmanTribute/images/feynmanThumb.jpg" alt="Richard Feynman" width="260" height="305">
+                            <img src="http://adrienatallah.github.io/projects/feynmanTribute/images/feynmanThumb.jpg" alt="Richard Feynman">
                         </a>
                         <div class="carousel-caption">
-                            <h3>Feynman Tribute Page</h3>
+                            <a href="http://adrienatallah.github.io/projects/feynmanTribute/index.htm" target="_blank">
+                                <h3>Feynman Tribute Page</h3>
+                            </a>
                             <p>A one page tribute to the famous physicist Richard Feynman</p>
                         </div>
                     </div>
 
                     <div class="item">
-                        <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
+                        <a href="http://adrienatallah.github.io/projects/randomQuote/index.htm" target="_blank">
+                            <img src="http://adrienatallah.github.io/projects/randomQuote/images/randomQuoteThumb.png" alt="Random Quote Machine">
+                        </a>
                         <div class="carousel-caption">
-                            <h3>Chania</h3>
-                            <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                            <a href="http://adrienatallah.github.io/projects/randomQuote/index.htm" target="_blank">
+                                <h3>Random Quote Machine</h3>
+                            </a>
+                            <p>Generate a random tweetable quote</p>
                         </div>
                     </div>
 
                     <div class="item">
-                        <img src="img_flower.jpg" alt="Flower" width="460" height="345">
+                        <a href="http://rpubs.com/AdrienAtallah/SevereWeatherEvents" target="_blank">
+                            <img src="http://adrienatallah.github.io/projects/severeWeather/images/severeWeatherThumb.png" alt="Severe Weather Events">
+                        </a>
                         <div class="carousel-caption">
-                            <h3>Chania</h3>
-                            <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                            <a href="http://rpubs.com/AdrienAtallah/SevereWeatherEvents" target="_blank">
+                                <h3>Severe Weather Events</h3>
+                            </a>
+                            <p>Data project on the most damage causing severe weather events</p>
                         </div>
                     </div>
 
@@ -191,14 +197,14 @@
                 </a>
             </div>
         </div>
-
-        <!-- <p class="lead">Web:</p>
-        <div class="row">  <!--row1-->
-        <!-- <div class="col-sm-3">
-        <a href="http://adrienatallah.github.io/projects/feynmanTribute/index.htm" target="_blank"> <img class="img-thumbnail figure-img" id="workThumb" src="http://65.media.tumblr.com/eeaeda47bf5a7f50c49c80fbcc8e94ff/tumblr_inline_n1uj5idy6J1rlx4dt.jpg" alt="Tribute Page"> <br>Feynman Tribute Page </a>
     </div>
-    <div class="col-sm-3">
-    <a href="http://adrienatallah.github.io/projects/randomQuote/index.htm" target="_blank"> <img class="img-thumbnail figure-img" id="workThumb" src="http://adrienatallah.github.io/projects/randomQuote/images/randomQuoteThumb.png" target="_blank" alt="Tribute Page"><br> Random Quote Machine </a>
+    <!-- <p class="lead">Web:</p>-->
+    <!-- <div class="row"> --> <!--row1-->
+    <!-- <div class="col-sm-3">
+    <a href="http://adrienatallah.github.io/projects/feynmanTribute/index.htm" target="_blank"> <img class="img-thumbnail figure-img" id="workThumb" src="http://65.media.tumblr.com/eeaeda47bf5a7f50c49c80fbcc8e94ff/tumblr_inline_n1uj5idy6J1rlx4dt.jpg" alt="Tribute Page"> <br>Feynman Tribute Page </a>
+</div>
+<div class="col-sm-3">
+<a href="http://adrienatallah.github.io/projects/randomQuote/index.htm" target="_blank"> <img class="img-thumbnail figure-img" id="workThumb" src="http://adrienatallah.github.io/projects/randomQuote/images/randomQuoteThumb.png" target="_blank" alt="Tribute Page"><br> Random Quote Machine </a>
 </div>
 <div class="col-sm-3">
 <a href="#"> <img class="img-thumbnail figure-img" id="workThumb" src="http://www.nasa.gov/sites/default/files/thumbnails/image/hubble_lightsaber_image1.jpg" target="_blank" alt="Tribute Page"><br> Hubble Light Saber (FILLER)</a>
@@ -208,7 +214,7 @@
 </div>
 </div>
 <br> -->
-<!-----row2------>
+<!---row2------>
 <!-- <p class="lead">Data:</p>
 <div class="row">
 <div class="col-sm-3">
@@ -224,13 +230,11 @@
 <a href="#"> <img class="img-thumbnail figure-img" id="workThumb" src="http://matchbin-assets.s3.amazonaws.com/public/sites/351/assets/sunset_11108_031.jpg" target="_blank" alt="Tribute Page"><br> Sunset in Ocean Beach, San Diego (FILLER)</a>
 </div>
 </div>-->
-</div>
+<!-- </div> -->
 <!--end projects section-->
 
 <!--begin contact section-->
 <div id="connect" class="container-fluid jumbotron">
-
-
     <h2>Connect</h2>
     <div id="buttons">
         <a href="https://www.linkedin.com/in/adrienatallah" target="_blank" class="btn btn-default btn-info">
@@ -245,7 +249,14 @@
             </div>
         </div>
         <!--end contact section-->
+
+        <footer>
+            <br>
+            <p id = "credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
+        </footer>
     </body>
+
+
 
 
     <script type="text/javascript">

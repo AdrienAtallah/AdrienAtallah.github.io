@@ -12,6 +12,10 @@
   //height:100vh;
 }
 
+#introText {
+    text-align: justify;
+}
+
 #technologies{
   padding-top: 50px;
   /*height: 700px;*/
@@ -29,8 +33,13 @@
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-    width: 70%;
+    width: 50%;
     margin: auto;
+}
+
+.carousel-caption{
+    margin-top: 50px;
+    text-shadow: 100%;
 }
 
 #connect{
@@ -55,6 +64,10 @@
   bottom: 0px;
 }
 
-p {
-    text-align: justify;
+
+
+footer {
+    margin-top: 300px;
+	position: absolute;
+	bottom: 0px;
 }
