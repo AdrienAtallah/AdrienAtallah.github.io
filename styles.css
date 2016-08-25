@@ -1,15 +1,13 @@
 #main {
-  position: relative;
-  margin-top: 20px;
-  background-color: #e0ebeb;
-  font-family: Raleway, "Georgia";
+    position: relative;
+    padding-top: 60px;
+    background-color: #e0ebeb;
+    font-family: Raleway, "Georgia";
 }
 
 #intro{
-  background-color: #d6d6c2;
- // text-align: center;
-  /* height: 700px; */
-  //height:100vh;
+    background-color: #d6d6c2;
+    padding-top: 60px;
 }
 
 #introText {
@@ -17,26 +15,19 @@
 }
 
 #technologies{
-  padding-top: 50px;
-  /*height: 700px;*/
-  //height:100vh;
-  //color: #000;
-  background-color: #d6d6c2;
-  align: justify;
+    padding-top: 60px;
+    background-color: #d6d6c2;
+    align: justify;
 }
 
 #projects{
- // padding-top: 50px;
- // color: #000;
-  background-color: #d6d6c2;
- // height: auto;
+    padding-top: 60px;
+    background-color: #d6d6c2;
 }
 
 #carousel-pic{
-    //width: 500px;
     height: 500px;
     width: auto;
-    //height: auto;
 }
 
 .carousel-inner > .item > img,
@@ -54,33 +45,15 @@
 
 .carousel-caption > p {
     color: black;
-    //font-size: small;
-    //font-style: oblique;
 }
 
 #connect{
-  padding-top: 100px;
-  color: #000;
-  background-color: #d6d6c2;
-  text-align: right;
-}
-
-#profilePic {
-
-}
-
-#workThumb {
-  height: 250px;
-  width: 250px;
-}
-
-#buttons{
-  position: relative;
-  right: 0px;
-  bottom: 0px;
+    padding-top: 100px;
+    background-color: #d6d6c2;
+    text-align: right;
 }
 
 #credit{
-	position: absolute;
-	bottom: -10px;
+    position: absolute;
+    bottom: -10px;
 }
