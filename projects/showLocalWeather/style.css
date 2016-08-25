@@ -1,0 +1,15 @@
+#pbody {
+	margin-top:60px;
+	font-family: Raleway, cursive;
+	text-align: center;
+	background-color: #d6d6c2;
+}
+
+#credit{
+	font-size: small;
+}
+
+footer {
+	position: fixed;
+	bottom: 0px;
+}
