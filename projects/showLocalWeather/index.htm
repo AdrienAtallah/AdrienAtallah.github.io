@@ -37,7 +37,7 @@
             <div class="row text-center">
 
                 <button id="getQuote" class="btn btn-primary btn-lg">
-                    Generate Random Quote
+                    Show Local Weather
                 </button>
 
                 <a id="tweet" target="_blank" href="https://twitter.com/intent/tweet?text='Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.' -Mosher’s Law of Software Engineering">
@@ -55,46 +55,47 @@
     </div>
 
 
-
     <script type="text/javascript">
     $(function() {
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log("latitude: " + position.coords.latitude + " longitude: " + position.coords.longitude);
-                //$("#data").html("latitude: " + position.coords.latitude + "    <br>longitude: " + position.coords.longitude);
-            });
-        }
-
         $("#getQuote").on("click", function() {
-            $.ajax({
+            $.ajax({ //get ip
                 url: "https://jsonip.com/?callback=?",
                 dataType: "jsonp",
-                jsonpCallback: "gotLocation"
+                jsonpCallback: "gotIp"
             });
         });	//end click
     });
 
-    function gotLocation(json){
-        console.log(json.ip);
+    function gotIp(ipData){
+        var ip = ipData.ip;
+        var locationURL = "https://geoip.nekudo.com/api/" + ip;
 
-        var $quoteElement = $('.quote');
-        var $authorElement = $('.author');
-
-        $quoteElement.fadeOut('slow', function () {
-            $quoteElement.html(json.quote);
-            $quoteElement.fadeIn('slow');
+        $.ajax({ //get location, longitude and latitude
+            url: locationURL,
+            dataType: "jsonp",
+            jsonpCallback: "gotLocation"
         });
-
-        $authorElement.fadeOut('slow', function () {
-            $authorElement.html(json.author);
-            $authorElement.fadeIn('slow');
-
-        });
-
-        $('#tweet').attr('href', 'https://twitter.com/intent/tweet?text=' + '\'' + encodeURIComponent(json.quote) + '\'' + ' -' + json.author);
 
     }; //end gotQuote
+
+    function gotLocation(locationData) {
+        var lat = locationData.location.latitude;
+        var long = locationData.location.longitude;
+        var weatherURL = "api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long;
+        //console.log(lat, long);
+
+        $.ajax({
+            url: weatherURL,
+            dataType: "jsonp",
+            jsonpCallback: "gotWeather"
+        });
+
+    };
+
+    function gotWeather(weatherData) {
+
+        console.log(weatherData);
+    };
 
     </script>
 </body>
