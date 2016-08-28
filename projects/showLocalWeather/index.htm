@@ -79,22 +79,26 @@
     }; //end gotQuote
 
     function gotLocation(locationData) {
-        var lat = locationData.location.latitude;
-        var long = locationData.location.longitude;
-        var weatherURL = "api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long;
-        //console.log(lat, long);
+        var city = (locationData.city);
+        var lat = Math.round(locationData.location.latitude);
+        var long = Math.round(locationData.location.longitude);
+        var weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +"&APPID=90063d7036a5ae88fc056d9a76e018ca";
 
         $.ajax({
             url: weatherURL,
             dataType: "jsonp",
             jsonpCallback: "gotWeather"
         });
-
     };
 
     function gotWeather(weatherData) {
+        var tempCelsius = Math.round(weatherData.main.temp - 273);
+        var tempFahrenheit = Math.round((tempCelsius * (9/5) + 32));
 
-        console.log(weatherData);
+        var main = weatherData.weather[0].main;
+        var description = weatherData.weather[0].description;
+
+        console.log(tempCelsius, tempFahrenheit, main, description);
     };
 
     </script>
