@@ -21,14 +21,19 @@
 <body id="pbody">
     <div class="container-fluid">
         <div class="jumbotron jumbotron-fluid text-center">
+
             <div class="row text-center">
-                <h2>Local Weather</h2>
+                <h2 class="city">Local Weather</h2>
             </div>
 
             <div class="row text-center">
+                <div class="col-md-9 col-xs-12 well">
+                    <p class="weather">yoo</p>
 
-                <div class="col-xs-12 well message">
+                </div>
 
+                <div class="col-md-3">
+                    <img class="icon" alt="weather icon" src="http://openweathermap.org/img/w/10d.png">
 
                 </div>
 
@@ -84,6 +89,10 @@
         var long = Math.round(locationData.location.longitude);
         var weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +"&APPID=90063d7036a5ae88fc056d9a76e018ca";
 
+        var $cityElement = $('.city');
+
+        $cityElement.html(city);
+
         $.ajax({
             url: weatherURL,
             dataType: "jsonp",
@@ -98,7 +107,22 @@
         var main = weatherData.weather[0].main;
         var description = weatherData.weather[0].description;
 
-        console.log(tempCelsius, tempFahrenheit, main, description);
+        var weatherID = weatherData.weather[0].id;
+
+        var $weatherElement = $('.weather');
+        var $iconElement = $('.icon');
+
+        $weatherElement.html(main + " : " + description);
+
+        switch (weatherID) {
+            case 0:
+                day = "Sunday";
+                break;
+        }
+
+        $('.icon').attr('src', 'http://openweathermap.org/img/w/10n.png');
+
+        console.log(weatherData.weather[0].id);
     };
 
     </script>
