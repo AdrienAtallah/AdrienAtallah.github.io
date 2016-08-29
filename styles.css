@@ -7,7 +7,7 @@
 
 #intro{
     background-color: #d6d6c2;
-    padding-top: 60px;
+    padding-top: 20px;
 }
 
 #introText {
@@ -46,6 +46,17 @@
 .carousel-caption > p {
     color: black;
 }
+
+.carousel-indicators li {
+  background-color: #668399 !important;
+}
+.carousel-indicators .active {
+  background-color: #072101 !important;
+}
+
+/*.carousel-indicators > li {
+    color: black;
+}*/
 
 #connect{
     padding-top: 100px;
