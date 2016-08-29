@@ -8,7 +8,7 @@
 
     <link rel="icon" href="http://adrienatallah.github.io/images/icon/agreloy.png">
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
     <link href="styles.css" rel="stylesheet" type="text/css">
 
 
@@ -20,115 +20,128 @@
 </head>
 <body id="pbody">
     <div class="container">
-        <div class="jumbotron">
+        <!-- <div class="jumbotron"> -->
+            <div class="row">
+                <div class="col-sm-3">
 
-            <div class="">
-                <h2 class="city">Local Weather</h2>
-            </div>
-
-            <div class="well">
-                <div class="">
-                    <p class="weather">yoo</p> <br>
-                    <p class="temp"> teep </p>                    
-                    <img class="icon" alt="weather icon" src="http://openweathermap.org/img/w/10d.png">
                 </div>
+
+                <div class="col-sm-6 jumbotron">
+                    <div class="">
+                        <h2 class="city">Local Weather</h2>
+                    </div>
+
+                    <div class="well">
+                        <div class="">
+                            <p class="weather"> </p> <br>
+                            <p class="temp">Powered by </p>
+                            <img class="icon" alt="weather icon" src="http://openweathermap.org/themes/demo/assets/vendor/owm/images/logo_OpenWeatherMap_orange_website.png">
+                        </div>
+                    </div>
+
+                    <div class="">
+
+                        <button id="getWeather" class="btn btn-primary btn-lg">
+                            Show Local Weather
+                        </button>
+
+                        <br><br><br>
+
+                        <button id="showFahrenheit" class="btn btn-primary btn-md">
+                            Fahrenheit
+                        </button>
+
+                        <button id="showCelsius" class="btn btn-primary btn-md">
+                            Celsius
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+
+                </div>
+
             </div>
+        <!-- </div> -->
+        <footer>
+            <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
+        </footer>
 
-            <div class="">
-
-                <button id="getWeather" class="btn btn-primary btn-lg">
-                    Show Local Weather
-                </button>
-
-                <button id="showFahrenheit" class="btn btn-primary btn-lg">
-                    Fahrenheit
-                </button>
-
-                <button id="showCelsius" class="btn btn-primary btn-lg">
-                    Celsius
-                </button>
-
-            </div>
-        </div>
-
-    <footer>
-        <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
-    </footer>
-
-</div>
+    </div>
 
 
-<script type="text/javascript">
-$(function() {
-    $("#getWeather").on("click", function() {
-        $.ajax({ //get ip
-            url: "https://jsonip.com/?callback=?",
+    <script type="text/javascript">
+    $(function() {
+        $("#getWeather").on("click", function() {
+            $.ajax({ //get ip
+                url: "https://jsonip.com/?callback=?",
+                dataType: "jsonp",
+                jsonpCallback: "gotIp"
+            });
+        });	//end click
+    });
+
+    function gotIp(ipData){
+        var ip = ipData.ip;
+        var locationURL = "https://geoip.nekudo.com/api/" + ip;
+
+        $.ajax({ //get location: longitude and latitude
+            url: locationURL,
             dataType: "jsonp",
-            jsonpCallback: "gotIp"
+            jsonpCallback: "gotLocation"
         });
-    });	//end click
-});
 
-function gotIp(ipData){
-    var ip = ipData.ip;
-    var locationURL = "https://geoip.nekudo.com/api/" + ip;
+    }; //end gotQuote
 
-    $.ajax({ //get location: longitude and latitude
-        url: locationURL,
-        dataType: "jsonp",
-        jsonpCallback: "gotLocation"
-    });
+    function gotLocation(locationData) {
+        var city = (locationData.city);
+        var lat = Math.round(locationData.location.latitude);
+        var long = Math.round(locationData.location.longitude);
+        var weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +"&APPID=90063d7036a5ae88fc056d9a76e018ca";
 
-}; //end gotQuote
+        var $cityElement = $('.city');
 
-function gotLocation(locationData) {
-    var city = (locationData.city);
-    var lat = Math.round(locationData.location.latitude);
-    var long = Math.round(locationData.location.longitude);
-    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +"&APPID=90063d7036a5ae88fc056d9a76e018ca";
+        $cityElement.html(city);
 
-    var $cityElement = $('.city');
+        $.ajax({
+            url: weatherURL,
+            dataType: "jsonp",
+            jsonpCallback: "gotWeather"
+        });
+    };
 
-    $cityElement.html(city);
+    function gotWeather(weatherData) {
+        var tempCelsius = Math.round(weatherData.main.temp - 273);
+        var tempFahrenheit = Math.round((tempCelsius * (9/5) + 32));
 
-    $.ajax({
-        url: weatherURL,
-        dataType: "jsonp",
-        jsonpCallback: "gotWeather"
-    });
-};
+        var main = weatherData.weather[0].main;
+        var description = weatherData.weather[0].description;
 
-function gotWeather(weatherData) {
-    var tempCelsius = Math.round(weatherData.main.temp - 273);
-    var tempFahrenheit = Math.round((tempCelsius * (9/5) + 32));
+        var weatherID = weatherData.weather[0].id;
 
-    var main = weatherData.weather[0].main;
-    var description = weatherData.weather[0].description;
+        var $weatherElement = $('.weather');
+        var $iconElement = $('.icon');
 
-    var weatherID = weatherData.weather[0].id;
+        var $tempElement = $('.temp');
 
-    var $weatherElement = $('.weather');
-    var $iconElement = $('.icon');
+        $weatherElement.html(main + " : " + description);
+        $tempElement.html(tempFahrenheit + '&deg; F');
+        $iconElement.attr('src', 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png');
 
-    var $tempElement = $('.temp');
+        $("#showFahrenheit").on("click", function() {
 
-    $weatherElement.html(main + " : " + description);
-    $tempElement.html(tempFahrenheit);
-    $iconElement.attr('src', 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png');
+            $tempElement.html(tempFahrenheit + '&deg; F');
 
-    $("#showFahrenheit").on("click", function() {
+        });	//end click
 
-        $tempElement.html(tempFahrenheit);
+        $("#showCelsius").on("click", function() {
 
-    });	//end click
+            $tempElement.html(tempCelsius + '&deg; C');
 
-    $("#showCelsius").on("click", function() {
+        });	//end click
+    };
 
-        $tempElement.html(tempCelsius);
-
-    });	//end click
-};
-
-</script>
+    </script>
 </body>
 </html>

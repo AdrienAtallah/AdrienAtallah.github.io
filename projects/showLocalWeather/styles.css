@@ -1,7 +1,10 @@
 #pbody {
 	margin-top:60px;
-	width: 50%;
-	font-family: Raleway, cursive;
+	//margin-left: auto;
+	//margin-right: auto;
+	//width: 50px;
+	font-family: "Cormorant Garamond", cursive;
+	font-weight: bolder;
 	text-align: center;
 //	background-color: #d6d6c2;
 	background-image: url(http://adrienatallah.github.io/images/background/textureWhite.jpg);
@@ -14,5 +17,9 @@
 footer {
 	position: fixed;
 	bottom: 0px;
+}
 
+.icon {
+	width: auto;
+	height: 50px;
 }
