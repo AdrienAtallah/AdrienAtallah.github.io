@@ -75,7 +75,7 @@
         var ip = ipData.ip;
         var locationURL = "https://geoip.nekudo.com/api/" + ip;
 
-        $.ajax({ //get location, longitude and latitude
+        $.ajax({ //get location: longitude and latitude
             url: locationURL,
             dataType: "jsonp",
             jsonpCallback: "gotLocation"
@@ -114,15 +114,7 @@
 
         $weatherElement.html(main + " : " + description);
 
-        switch (weatherID) {
-            case 0:
-                day = "Sunday";
-                break;
-        }
-
-        $('.icon').attr('src', 'http://openweathermap.org/img/w/10n.png');
-
-        console.log(weatherData.weather[0].id);
+        $('.icon').attr('src', 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png');
     };
 
     </script>

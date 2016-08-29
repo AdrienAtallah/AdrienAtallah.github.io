@@ -2,7 +2,8 @@
 	margin-top:60px;
 	font-family: Raleway, cursive;
 	text-align: center;
-	background-color: #d6d6c2;
+//	background-color: #d6d6c2;
+	background-image: url(images/background/textureWhite.jpg);
 }
 
 #credit{
