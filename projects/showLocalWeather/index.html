@@ -19,104 +19,116 @@
 
 </head>
 <body id="pbody">
-    <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <div class="jumbotron">
 
-            <div class="row text-center">
+            <div class="">
                 <h2 class="city">Local Weather</h2>
             </div>
 
-            <div class="row text-center">
-                <div class="col-md-9 col-xs-12 well">
-                    <p class="weather">yoo</p>
-
-                </div>
-
-                <div class="col-md-3">
+            <div class="well">
+                <div class="">
+                    <p class="weather">yoo</p> <br>
+                    <p class="temp"> teep </p>                    
                     <img class="icon" alt="weather icon" src="http://openweathermap.org/img/w/10d.png">
-
                 </div>
-
             </div>
 
-            <div class="row text-center">
+            <div class="">
 
-                <button id="getQuote" class="btn btn-primary btn-lg">
+                <button id="getWeather" class="btn btn-primary btn-lg">
                     Show Local Weather
                 </button>
 
-                <a id="tweet" target="_blank" href="https://twitter.com/intent/tweet?text='Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.' -Mosher’s Law of Software Engineering">
-                    <button class="btn btn-primary btn-lg">
-                        Tweet this
-                    </button>
-                </a>
+                <button id="showFahrenheit" class="btn btn-primary btn-lg">
+                    Fahrenheit
+                </button>
+
+                <button id="showCelsius" class="btn btn-primary btn-lg">
+                    Celsius
+                </button>
+
             </div>
         </div>
 
-        <footer>
-            <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
-        </footer>
+    <footer>
+        <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
+    </footer>
 
-    </div>
+</div>
 
 
-    <script type="text/javascript">
-    $(function() {
-        $("#getQuote").on("click", function() {
-            $.ajax({ //get ip
-                url: "https://jsonip.com/?callback=?",
-                dataType: "jsonp",
-                jsonpCallback: "gotIp"
-            });
-        });	//end click
+<script type="text/javascript">
+$(function() {
+    $("#getWeather").on("click", function() {
+        $.ajax({ //get ip
+            url: "https://jsonip.com/?callback=?",
+            dataType: "jsonp",
+            jsonpCallback: "gotIp"
+        });
+    });	//end click
+});
+
+function gotIp(ipData){
+    var ip = ipData.ip;
+    var locationURL = "https://geoip.nekudo.com/api/" + ip;
+
+    $.ajax({ //get location: longitude and latitude
+        url: locationURL,
+        dataType: "jsonp",
+        jsonpCallback: "gotLocation"
     });
 
-    function gotIp(ipData){
-        var ip = ipData.ip;
-        var locationURL = "https://geoip.nekudo.com/api/" + ip;
+}; //end gotQuote
 
-        $.ajax({ //get location: longitude and latitude
-            url: locationURL,
-            dataType: "jsonp",
-            jsonpCallback: "gotLocation"
-        });
+function gotLocation(locationData) {
+    var city = (locationData.city);
+    var lat = Math.round(locationData.location.latitude);
+    var long = Math.round(locationData.location.longitude);
+    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +"&APPID=90063d7036a5ae88fc056d9a76e018ca";
 
-    }; //end gotQuote
+    var $cityElement = $('.city');
 
-    function gotLocation(locationData) {
-        var city = (locationData.city);
-        var lat = Math.round(locationData.location.latitude);
-        var long = Math.round(locationData.location.longitude);
-        var weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +"&APPID=90063d7036a5ae88fc056d9a76e018ca";
+    $cityElement.html(city);
 
-        var $cityElement = $('.city');
+    $.ajax({
+        url: weatherURL,
+        dataType: "jsonp",
+        jsonpCallback: "gotWeather"
+    });
+};
 
-        $cityElement.html(city);
+function gotWeather(weatherData) {
+    var tempCelsius = Math.round(weatherData.main.temp - 273);
+    var tempFahrenheit = Math.round((tempCelsius * (9/5) + 32));
 
-        $.ajax({
-            url: weatherURL,
-            dataType: "jsonp",
-            jsonpCallback: "gotWeather"
-        });
-    };
+    var main = weatherData.weather[0].main;
+    var description = weatherData.weather[0].description;
 
-    function gotWeather(weatherData) {
-        var tempCelsius = Math.round(weatherData.main.temp - 273);
-        var tempFahrenheit = Math.round((tempCelsius * (9/5) + 32));
+    var weatherID = weatherData.weather[0].id;
 
-        var main = weatherData.weather[0].main;
-        var description = weatherData.weather[0].description;
+    var $weatherElement = $('.weather');
+    var $iconElement = $('.icon');
 
-        var weatherID = weatherData.weather[0].id;
+    var $tempElement = $('.temp');
 
-        var $weatherElement = $('.weather');
-        var $iconElement = $('.icon');
+    $weatherElement.html(main + " : " + description);
+    $tempElement.html(tempFahrenheit);
+    $iconElement.attr('src', 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png');
 
-        $weatherElement.html(main + " : " + description);
+    $("#showFahrenheit").on("click", function() {
 
-        $('.icon').attr('src', 'http://openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png');
-    };
+        $tempElement.html(tempFahrenheit);
 
-    </script>
+    });	//end click
+
+    $("#showCelsius").on("click", function() {
+
+        $tempElement.html(tempCelsius);
+
+    });	//end click
+};
+
+</script>
 </body>
 </html>
