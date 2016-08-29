@@ -1,12 +1,8 @@
 #pbody {
 	margin-top:60px;
-	//margin-left: auto;
-	//margin-right: auto;
-	//width: 50px;
 	font-family: "Cormorant Garamond", cursive;
 	font-weight: bolder;
 	text-align: center;
-//	background-color: #d6d6c2;
 	background-image: url(http://adrienatallah.github.io/projects/showLocalWeather/images/textureWhite.jpg);
 }
 
