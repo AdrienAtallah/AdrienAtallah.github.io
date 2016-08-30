@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Wikipedia viewer</title>
+    <title>Wikipedia Viewer</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +19,30 @@
 </head>
 <body>
     <div class="container">
+        <div>
 
-        <button type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-search"></span> Search
-        </button>
+            <form accept-charset=”UTF-8″ action=”post” id=”inputform” method=”post”>
+                <label for=”name”>Name</label>
+                <input id=”name” name=”name” type=”text”>
+                <input type="submit" value="Submit" name="commit">
+                <!-- <input name=”commit” type=”submit” value=”Search”> -->
+            </form>
 
-        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Article</a>
+            <!-- <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button> -->
+        </div>
+
+        <div>
+
+            <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Article</a>
+
+        </div>
+
+        <div id=”container”>
+            <p id=”wiki_container”></p>
+            <div id=”wiki_attribution” style=”text-align:left; border-top:1px solid #c73734; font-size:13px;”></div>
+        </div>
 
 
         <footer>
@@ -36,22 +54,81 @@
     <script type="text/javascript">
 
     $(function() {
-        var query = "Main%20Page"
+//---------------------------------------------------
+        // $("#inputform").submit(function(){
+        //     var name = $("#name").attr(value);
+        //     console.log(name);
+        //     getAreaMetaInfo_Wikipedia(name);
+        //     return false;
+        // });
+//-----------------------------------------------------
 
-        var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=" + query + "&prop=revisions&rvprop=content&format=json"
+
+        var query = "Main%20page"
+
+        https://en.wikipedia.org/w/api.php?action=parse&text=%5B%5Bfoo%5D%5D+%5B%5BAPI%3AQuery%7Cbar%5D%5D+%5Bhttp%3A%2F%2Fwww.example.com%2F+baz%5D&contentmodel=wikitext
+
+        //var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=" + query + "&prop=revisions&rvprop=content&format=json"
+
+        var wikiUrl = "https://en.wikipedia.org/w/api.php?action=parse&text=" + query + "&contentmodel=wikitext&format=json"
 
         $.ajax( {
             url: wikiUrl,
-            data: queryData,
+            //data: queryData,
             dataType: 'jsonp',
-            type: 'POST',
-            headers: { 'Api-User-Agent': 'Example/1.0' },
+            data: {
+                       action: 'parse',
+                       prop: 'text',
+                       //page: title,
+                       format:'json'
+                   },
+            //type: 'POST',
+            //headers: { 'Api-User-Agent': 'Example/1.0' },
             success: function(data) {
+                //var keys = Object.keys(data.query.pages);
                 console.log(data);
+
+                $.each(data, function(key, value ) {
+                    console.log(key + ": " + value );
+                });
+
+                wikipage = $("<div>"+data.parse.text['*']+"</div>");
+                console.log(wikipage);
+
+                //wikipage.find('sup').remove();
+
+                $("#wiki_container").html(wikipage);
+                // $('#wiki_attribution').html("Description above from the Wikipedia article <a href='http://en.wikipedia.org/wiki/" +title+"' target='wikipedia'>"+title.replace(/_/g,' ')+
+                // "</a>, licensed under <a href='http://creativecommons.org/licenses/by-sa/3.0/' target='wikipedia'>CC-BY-SA</a>, full list of contributors <a href='http://en.wikipedia.org/w/index.php?title="+title+"&action=history' target='wikipedia'>here</a>. Community Pages are not affiliated with, or endorsed by, anyone associated with the topic.");
+                //console.log(data.query.pages[keys].revisions[0]);
             }
         });
 
     });
+//-------------------------------------------------------------------------------
+    // function getAreaMetaInfo_Wikipedia(page_id) {
+    //     title = page_id;
+    //     $.ajax({
+    //         url: "https://en.wikipedia.org/w/api.php?action=query&titles=" + name + "&contentmodel=wikitext&format=json",
+    //         data: {
+    //             action: 'parse',
+    //             prop: 'text',
+    //             page: title,
+    //             format:'json'
+    //         },
+    //         dataType:'jsonp',
+    //         success: function(data) {
+    //             console.log(data);
+    //
+    //             wikipage = $("<div>"+data.parse.text['*']+"</div>");
+    //             wikipage.find('sup').remove();
+    //             $("#wiki_container").html(wikipage);
+    //             $('#wiki_attribution').html("Description above from the Wikipedia article <a href='http://en.wikipedia.org/wiki/" +title+"' target='wikipedia'>"+title.replace(/_/g,' ')+
+    //             "</a>, licensed under <a href='http://creativecommons.org/licenses/by-sa/3.0/' target='wikipedia'>CC-BY-SA</a>, full list of contributors <a href='http://en.wikipedia.org/w/index.php?title="+title+"&action=history' target='wikipedia'>here</a>. Community Pages are not affiliated with, or endorsed by, anyone associated with the topic.");
+    //         }
+    //     });
+    // }
+    //--------------------------------------------------------------------
     </script>
 
 </body>
