@@ -11,7 +11,6 @@
 
     <link href="styles.css" rel="stylesheet" type="text/css">
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,17 +19,9 @@
 <body>
     <div class="container">
         <div>
-
-            <form accept-charset=”UTF-8″ action=”post” id=”inputform” method=”post”>
-                <label for=”name”>Name</label>
-                <input id=”name” name=”name” type=”text”>
-                <input type="submit" value="Submit" name="commit">
-                <!-- <input name=”commit” type=”submit” value=”Search”> -->
-            </form>
-
-            <!-- <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-success search">
                 <span class="glyphicon glyphicon-search"></span> Search
-            </button> -->
+            </button>
         </div>
 
         <div>
@@ -39,11 +30,9 @@
 
         </div>
 
-        <div id=”container”>
-            <p id=”wiki_container”></p>
-            <div id=”wiki_attribution” style=”text-align:left; border-top:1px solid #c73734; font-size:13px;”></div>
+        <div>
+            <ul class="wikiContainer"></ul>
         </div>
-
 
         <footer>
             <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
@@ -54,81 +43,42 @@
     <script type="text/javascript">
 
     $(function() {
-//---------------------------------------------------
-        // $("#inputform").submit(function(){
-        //     var name = $("#name").attr(value);
-        //     console.log(name);
-        //     getAreaMetaInfo_Wikipedia(name);
-        //     return false;
-        // });
-//-----------------------------------------------------
-
+        $(".search").on("click", function() {
 
         var query = "Main%20page"
 
-        https://en.wikipedia.org/w/api.php?action=parse&text=%5B%5Bfoo%5D%5D+%5B%5BAPI%3AQuery%7Cbar%5D%5D+%5Bhttp%3A%2F%2Fwww.example.com%2F+baz%5D&contentmodel=wikitext
+        $.ajax({
+            type: "GET",
+            url: "http://en.wikipedia.org/w/api.php?action=query&format=json&srwhat=text&limit=15&list=search&srsearch=" + query,
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            dataType: "jsonp",
+            success: function (data, textStatus, jqXHR) {
+                var answer = data["query"]["search"],
+                html = "";
+                // if (answer.length == 0) {
+                //     $(".wikiContainer").html("<span class='error_text'>Ooops! No results, try another request...</span>");
+                // } else {
 
-        //var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=" + query + "&prop=revisions&rvprop=content&format=json"
-
-        var wikiUrl = "https://en.wikipedia.org/w/api.php?action=parse&text=" + query + "&contentmodel=wikitext&format=json"
-
-        $.ajax( {
-            url: wikiUrl,
-            //data: queryData,
-            dataType: 'jsonp',
-            data: {
-                       action: 'parse',
-                       prop: 'text',
-                       //page: title,
-                       format:'json'
-                   },
-            //type: 'POST',
-            //headers: { 'Api-User-Agent': 'Example/1.0' },
-            success: function(data) {
-                //var keys = Object.keys(data.query.pages);
-                console.log(data);
-
-                $.each(data, function(key, value ) {
-                    console.log(key + ": " + value );
-                });
-
-                wikipage = $("<div>"+data.parse.text['*']+"</div>");
-                console.log(wikipage);
-
-                //wikipage.find('sup').remove();
-
-                $("#wiki_container").html(wikipage);
-                // $('#wiki_attribution').html("Description above from the Wikipedia article <a href='http://en.wikipedia.org/wiki/" +title+"' target='wikipedia'>"+title.replace(/_/g,' ')+
-                // "</a>, licensed under <a href='http://creativecommons.org/licenses/by-sa/3.0/' target='wikipedia'>CC-BY-SA</a>, full list of contributors <a href='http://en.wikipedia.org/w/index.php?title="+title+"&action=history' target='wikipedia'>here</a>. Community Pages are not affiliated with, or endorsed by, anyone associated with the topic.");
-                //console.log(data.query.pages[keys].revisions[0]);
+                    for (var i = 0; i < answer.length; i++) {
+                        html += "<li><a target='_blank' href='http://www.wikipedia.org/wiki/";
+                        html += answer[i]["title"] + "'>" + "<div class='title'>" + answer[i]["title"] + "</div>";
+                        html += answer[i]["snippet"] + "</a></li>";
+                    }
+                    $(".wikiContainer").html(html);
+                //}
+                console.log(html);
+            },
+            error: function (errorMessage) {
+                $('.wikiContainer').html("<span class='error_text'>Ooops! Try another request...</span>");
             }
         });
 
+    });	//end click
+
+
     });
-//-------------------------------------------------------------------------------
-    // function getAreaMetaInfo_Wikipedia(page_id) {
-    //     title = page_id;
-    //     $.ajax({
-    //         url: "https://en.wikipedia.org/w/api.php?action=query&titles=" + name + "&contentmodel=wikitext&format=json",
-    //         data: {
-    //             action: 'parse',
-    //             prop: 'text',
-    //             page: title,
-    //             format:'json'
-    //         },
-    //         dataType:'jsonp',
-    //         success: function(data) {
-    //             console.log(data);
-    //
-    //             wikipage = $("<div>"+data.parse.text['*']+"</div>");
-    //             wikipage.find('sup').remove();
-    //             $("#wiki_container").html(wikipage);
-    //             $('#wiki_attribution').html("Description above from the Wikipedia article <a href='http://en.wikipedia.org/wiki/" +title+"' target='wikipedia'>"+title.replace(/_/g,' ')+
-    //             "</a>, licensed under <a href='http://creativecommons.org/licenses/by-sa/3.0/' target='wikipedia'>CC-BY-SA</a>, full list of contributors <a href='http://en.wikipedia.org/w/index.php?title="+title+"&action=history' target='wikipedia'>here</a>. Community Pages are not affiliated with, or endorsed by, anyone associated with the topic.");
-    //         }
-    //     });
-    // }
-    //--------------------------------------------------------------------
+
     </script>
 
 </body>
