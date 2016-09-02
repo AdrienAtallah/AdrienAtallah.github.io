@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="icon" href="http://adrienatallah.github.io/images/icon/agreloy.png">
+    <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
 
     <link href="styles.css" rel="stylesheet" type="text/css">
 
@@ -16,36 +17,64 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
 </head>
-<body>
+<body id="main">
     <div class="container">
-        <div>
-            <button type="button" class="btn btn-success search">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </button>
+        <div class="row">
+            <div class="col-md-4" id="searchBarContainer">
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" id="searchText" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button">
+                            <img src="images/searchIcon.png" id="searchIcon"/>
+                        </button>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
         </div>
 
-        <div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
 
-            <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Article</a>
+            <div class="col-md-4">
+                <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Article</a>
+            </div>
 
+            <div class="col-md-4">            
+
+            </div>
         </div>
 
-        <div>
-            <ul class="wikiContainer"></ul>
-        </div>
-
-        <footer>
-            <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
-        </footer>
 
     </div>
 
-    <script type="text/javascript">
 
-    $(function() {
-        $(".search").on("click", function() {
 
-        var query = "Main%20page"
+    <div>
+        <ol class="wikiContainer"></ol>
+    </div>
+
+    <footer>
+        <p id="credit">Coded By: <a href="https://github.com/adrienatallah" target="_blank">Adrien Atallah</a>.</p>
+    </footer>
+
+</div>
+
+<script type="text/javascript">
+
+$(function() {
+    $(".search").on("click", function() {
+
+        var query = $('#searchText').val(); //"John%20goodman"
 
         $.ajax({
             type: "GET",
@@ -56,16 +85,16 @@
             success: function (data, textStatus, jqXHR) {
                 var answer = data["query"]["search"],
                 html = "";
-                // if (answer.length == 0) {
-                //     $(".wikiContainer").html("<span class='error_text'>Ooops! No results, try another request...</span>");
-                // } else {
+                // if (query.length == 0) {
+                //      $(".wikiContainer").html("<span class='error_text'>Ooops! No results, try another request...</span>");
+                //  } else {
 
-                    for (var i = 0; i < answer.length; i++) {
-                        html += "<li><a target='_blank' href='http://www.wikipedia.org/wiki/";
-                        html += answer[i]["title"] + "'>" + "<div class='title'>" + answer[i]["title"] + "</div>";
-                        html += answer[i]["snippet"] + "</a></li>";
-                    }
-                    $(".wikiContainer").html(html);
+                for (var i = 0; i < answer.length; i++) {
+                    html += "<li><a target='_blank' href='http://www.wikipedia.org/wiki/";
+                    html += answer[i]["title"] + "'>" + "<div class='title'>" + answer[i]["title"] + "</div>";
+                    html += answer[i]["snippet"] + "</a></li>";
+                }
+                $(".wikiContainer").html(html);
                 //}
                 console.log(html);
             },
@@ -77,9 +106,9 @@
     });	//end click
 
 
-    });
+});
 
-    </script>
+</script>
 
 </body>
 </html>

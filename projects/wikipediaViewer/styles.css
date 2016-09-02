@@ -1,4 +1,24 @@
+#main {
+	font-family: Eczar, arial;
+	font-size: 1.5em;
+	width: auto;
+	margin: 20px;
+	text-align: center;
+	height: 100vh;
+}
+
+#searchIcon {
+	width: 20px;
+	height: auto;
+}
+
+#searchBarContainer {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 footer {
-	position: fixed;
+	position: absolute;
 	bottom: 0px;
 }
